@@ -44,7 +44,7 @@ public class LCATest {
 		assertEquals("Uneven tree with three nodes: ", 1, bt.getLCA(3, 1).data);
 	}
 	
-	@Test //Test to ensure null is returned when we try to find the LCA of nodes that are not present in the tree.
+	@Test //Test to ensure null is returned when we try to find the LCA of numbers that are not present in the tree.
 	public void testForNonExistentNodesInTree () { 
 		LCA bt = new LCA();
 		bt.firstNode = new Node(1);
