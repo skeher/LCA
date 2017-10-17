@@ -10,8 +10,8 @@ public class LCATest {
 		assertNull("The tree is empty: ", bt.getLCA(2,3));
 	}
 
-	@Test
-	public void oneNodeTree() { //test to ensure the LCA of a tree with a single node is the node itself i.e the root (firstNode).
+	@Test //test to ensure the LCA of a tree with a single node is the node itself i.e the root (firstNode).
+	public void oneNodeTree() { 
 		LCA bt = new LCA();
 		bt.firstNode = new Node(1);
 		assertEquals("Single node in the tree: ", 1, bt.getLCA(1, 0).data);
@@ -19,8 +19,8 @@ public class LCATest {
 		assertEquals("Single node in the tree: ", 1, bt.getLCA(1, 1).data);
 	}
 	
-	@Test
-	public void twoNodesTree () { //test to ensure the LCA of a tree with two nodes is returned correctly.
+	@Test //test to ensure the LCA of a tree with two nodes is returned correctly.
+	public void twoNodesTree () { 
 		LCA bt = new LCA();
 		bt.firstNode = new Node(1);
 		bt.firstNode.left = new Node(2);
@@ -28,13 +28,26 @@ public class LCATest {
 		assertEquals("Two nodes tree: ", 1, bt.getLCA(2, 1).data);
 	}
 	
-	@Test
-	public void unevenTree () { //test to ensure the LCA of an unbalanced, one sided tree is returned correctly.
+	@Test //test to ensure the LCA of an unbalanced, one sided tree is returned correctly.
+	public void unevenTree () { 
 		LCA bt = new LCA();
 		bt.firstNode = new Node(1);
 		bt.firstNode.right = new Node(2);
 		bt.firstNode.right.right = new Node(3);
 		assertEquals("Uneven tree with three nodes: ", 2, bt.getLCA(2,3).data);	
 		assertEquals("Uneven tree with three nodes: ", 1, bt.getLCA(3, 1).data);
+	}
+	
+	@Test //Test to ensure null is returned when we try to find the LCA of nodes that are not present in the tree.
+	public void testForNonExistentNodesInTree () { 
+		LCA bt = new LCA();
+		bt.firstNode = new Node(1);
+		bt.firstNode.left = new Node(2);
+		bt.firstNode.right = new Node(3);
+		bt.firstNode.left.left = new Node(4);
+		bt.firstNode.left.right = new Node(5);
+		bt.firstNode.right.right = new Node(6);
+		bt.firstNode.right.left = new Node(7);
+		assertNull("Searching for nodes that are not in the tree: ", bt.getLCA(12, 19).data);
 	}
 }
