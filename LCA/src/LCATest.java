@@ -56,4 +56,24 @@ public class LCATest {
 		bt.firstNode.right.left = new Node(7);
 		assertNull("Searching for nodes that are not in the tree: ", bt.getLCA(12, 19).data);
 	}
+	
+	@Test //ensures the LCA of two nodes in a large tree is returned correctly.
+	public void largeTree () {
+		LCA bt = new LCA();
+		bt.firstNode = new Node(1);
+		bt.firstNode.left = new Node(2);
+		bt.firstNode.right = new Node(3);
+		bt.firstNode.left.left = new Node(4);
+		bt.firstNode.left.right = new Node(5);
+		bt.firstNode.right.right = new Node(6);
+		bt.firstNode.right.left = new Node(7);
+		bt.firstNode.left.left.left = new Node(8);
+		bt.firstNode.right.left.left = new Node(9);
+		bt.firstNode.right.left.right = new Node(10);
+		assertEquals("Many nodes in a tree: ", 1 ,bt.getLCA(1, 3).data);
+		assertEquals("Many nodes in a tree: ", 1 ,bt.getLCA(5, 1).data);
+		assertEquals("Many nodes in a tree: ", 2 ,bt.getLCA(5, 4).data);
+		assertEquals("Many nodes in a tree: ", 7 ,bt.getLCA(9, 10).data);
+		assertEquals("Many nodes in a tree: ", 3 ,bt.getLCA(6, 9).data);
+	}
 }
