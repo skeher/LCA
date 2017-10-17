@@ -3,6 +3,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class LCATest {
+	
+	@Test //Ensures the constructor is working.
+	public void constructerTest () {
+		Node x = new Node(1);
+		assertNotNull("Testing if the constructer works ", x);
+	}
 
 	@Test //Test to ensure null is returned when the tree is empty.
 	public void emptyTree() {
