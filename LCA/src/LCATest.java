@@ -54,7 +54,9 @@ public class LCATest {
 		bt.firstNode.left.right = new Node(5);
 		bt.firstNode.right.right = new Node(6);
 		bt.firstNode.right.left = new Node(7);
-		assertNull("Searching for nodes that are not in the tree: ", bt.getLCA(12, 19).data);
+		assertNull("Searching for two nodes that are not in the tree: ", bt.getLCA(12, 19)); //fixed mistake here. Removed '.data'
+		assertNull("Searching for one node that is not in the tree: ", bt.getLCA(3, 10)); //found a glitch here. Assertion error
+		assertNull("Searching for one node that is not in the tree: ", bt.getLCA(6, 96));
 	}
 	
 	@Test //ensures the LCA of two nodes in a large tree is returned correctly.
