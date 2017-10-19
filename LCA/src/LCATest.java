@@ -20,8 +20,6 @@ public class LCATest {
 	public void oneNodeTree() { 
 		LCA bt = new LCA();
 		bt.firstNode = new Node(1);
-		assertEquals("Single node in the tree: ", 1, bt.getLCA(1, 0).data);
-		assertEquals("Single node in the tree: ", 1, bt.getLCA(0, 1).data);
 		assertEquals("Single node in the tree: ", 1, bt.getLCA(1, 1).data);
 	}
 	
