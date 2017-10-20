@@ -19,16 +19,15 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 	}
 
 	Node getLCA(Node node, int num1, int num2) {
-		//No longer need the private method 'areNumbersPresent' to check if numbers are present in the tree. 
-		//The code below will return null if no such numbers are present.  It will also find the LCA of the numbers recursively.
+		//The code below will find the LCA of two nodes recursively.
 		
-		if (node == null) {
+		if (node == null) { //Checks if the current node is null.
 			return null;
 		}
-		if(numsPresent(firstNode, num1) == false || numsPresent(firstNode, num2) == false) { //if one of the nodes isn't present
+		if(!numsPresent(firstNode, num1) || !numsPresent(firstNode, num2)) { //if one of the nodes isn't present, return null.
 			return null;
 		}
-		if (node.data == num1 || node.data == num2) { //checks if one of the numbers is equal to the firstNode's value (root).
+		if (node.data == num1 || node.data == num2) { //checks if one of the numbers is equal to the node's value.
 			return node;
 		}
 
