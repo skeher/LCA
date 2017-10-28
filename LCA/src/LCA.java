@@ -1,3 +1,5 @@
+//Created a branch to work on the modification of the initial LCA problem to implement directed acyclic graphs.
+
 class Node { //Node class will be used to create a binary tree
 	int data; //Node stores a value
 	Node left; 
