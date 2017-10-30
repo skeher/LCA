@@ -16,7 +16,10 @@ class Node<T> {
 		connectingEdges = 0;
 	}
 	public void rootFinder (Node<T> node) {
-		node.connectingEdges ++;
+		if (node != null) {
+			this.listOfChildNodes.add(node);
+			node.connectingEdges ++;
+		}
 	}
 }
 
@@ -29,22 +32,22 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 			return null;
 		}
 		Node root = null; //for now
-    	ArrayList<Node> ancestor1 = new ArrayList<Node>();
-    	ArrayList<Node> ancestor2 = new ArrayList<Node>();
-    	ArrayList<Node> lca = new ArrayList<Node>();
-        
-        ancestor1.add(node1);
-        ancestor2.add(node2);
-        for (int i = 0; i < graph.size(); i ++) {
-        	if (graph.get(i).connectingEdges == 0) {
-        		root = graph.get(i);
-        	}
-        }
-        ancestor1.add(node1);
-        ancestor2.add(node2);
-        find(root, ancestor1, ancestor2);
-        
-        
+		ArrayList<Node> ancestor1 = new ArrayList<Node>();
+		ArrayList<Node> ancestor2 = new ArrayList<Node>();
+		ArrayList<Node> lca = new ArrayList<Node>();
+
+		ancestor1.add(node1);
+		ancestor2.add(node2);
+		for (int i = 0; i < graph.size(); i ++) {
+			if (graph.get(i).connectingEdges == 0) {
+				root = graph.get(i);
+			}
+		}
+		ancestor1.add(node1);
+		ancestor2.add(node2);
+		find(root, ancestor1, ancestor2);
+
+
 		return lca;
 	}
 
@@ -68,7 +71,7 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 		return true;
 	}
-	
+
 	private static boolean isGraphAcyclic(ArrayList<Node> graph, ArrayList<Node> listToCompare, ArrayList<Node> checked, boolean graphHasACycle, Node index) {
 		//Forgot to add the indexed node to my ArrayLists... 
 		listToCompare.add(index); 
@@ -79,12 +82,12 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 				graphHasACycle = graphHasACycle || isGraphAcyclic(graph, listToCompare, checked, graphHasACycle, currentNode);
 			else if (listToCompare.contains(currentNode)) 
 				graphHasACycle = true;
-				return graphHasACycle;
+			return graphHasACycle;
 		}
 		listToCompare.remove(index);
 		return graphHasACycle;
 	}
-	
+
 	public static void find (Node root, ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
 		for (int i = 0; i < root.listOfChildNodes.size(); i++) {
 			Node currentChild = (Node) root.listOfChildNodes.get(i);
@@ -102,5 +105,5 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 			}
 		}
 	}
-   
+
 }
