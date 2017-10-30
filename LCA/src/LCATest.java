@@ -62,7 +62,37 @@ public class LCATest {
 	@Test 
 	public void testGetLCA () {
 		
+		Node a = new Node(1);
+		Node b = new Node(2);
+		Node c = new Node(3);
+		Node d = new Node(4);
+		Node e = new Node(5);
+		Node f = new Node(6);
 		
+		a.listOfChildNodes.add(b);
+		a.rootFinder(b);
+		a.listOfChildNodes.add(c);
+		a.rootFinder(c);
+		a.listOfChildNodes.add(d);
+		a.rootFinder(d);
+		b.listOfChildNodes.add(c);
+		b.rootFinder(c);
+		b.listOfChildNodes.add(f);
+		b.rootFinder(f);
+		c.listOfChildNodes.add(e);
+		c.rootFinder(e);
+		e.listOfChildNodes.add(f);
+		e.rootFinder(f);
+		
+		ArrayList<Node> test = new ArrayList<Node>();
+		test.add(e);
+		test.add(f);
+		test.add(d);
+		test.add(c);
+		test.add(b);
+		test.add(a);
+		
+		assertEquals("Test: ", a.data, LCA.getLCA(test, f, b));
 	}
 	
 }
