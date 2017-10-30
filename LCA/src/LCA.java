@@ -15,11 +15,12 @@ class Node<T> {
 		child = null;
 		connectingEdges = 0;
 	}
+	public void rootFinder (Node<T> node) {
+		node.connectingEdges ++;
+	}
 }
 
 public class LCA { //LCA class. Lowest Common Ancestor will be found here.
-
-	Node root;
 
 	//returns an 
 	public static ArrayList<Node> getLCA(ArrayList<Node> graph, Node node1, Node node2) {
@@ -27,12 +28,20 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		if (!isNotNull(graph, node1, node2) || !isGraphAcyclic(graph)) {
 			return null;
 		}
+		Node root;
     	ArrayList<Node> ancestor1 = new ArrayList<Node>();
     	ArrayList<Node> ancestor2 = new ArrayList<Node>();
     	ArrayList<Node> lca = new ArrayList<Node>();
         
         ancestor1.add(node1);
         ancestor2.add(node2);
+        for (int i = 0; i < graph.size(); i ++) {
+        	if (graph.get(i).connectingEdges == 0) {
+        		root = graph.get(i);
+        	}
+        }
+        
+        
 		return lca;
 	}
 
