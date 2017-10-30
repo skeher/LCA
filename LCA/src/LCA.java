@@ -15,7 +15,7 @@ class Node<T> {
 		child = null;
 		connectingEdges = 0;
 	}
-	public void rootFinder (Node<T> node) {
+	public void linkAndRootFinder (Node<T> node) {
 		if (node != null) {
 			this.listOfChildNodes.add(node);
 			node.connectingEdges ++;
@@ -31,7 +31,7 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		if (!isNotNull(graph, node1, node2) || !isGraphAcyclic(graph)) {
 			return null;
 		}
-		Node root = null; //for now
+		ArrayList<Node> roots = new ArrayList<Node>();
 		ArrayList<Node> ancestor1 = new ArrayList<Node>();
 		ArrayList<Node> ancestor2 = new ArrayList<Node>();
 		ArrayList<Node> lca = new ArrayList<Node>();
@@ -40,13 +40,14 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		ancestor2.add(node2);
 		for (int i = 0; i < graph.size(); i ++) {
 			if (graph.get(i).connectingEdges == 0) {
-				root = graph.get(i);
+				roots.add(graph.get(i));
 			}
 		}
 		ancestor1.add(node1);
 		ancestor2.add(node2);
-		find(root, ancestor1, ancestor2);
-		
+		for (int i = 0; i < roots.size(); i ++) {
+			find(roots.get(i), ancestor1, ancestor2);
+		}
 		lca = pathsCross(ancestor1, ancestor2);
 		if (lca.size() == 0) {
 			return null;
@@ -55,10 +56,13 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 			for (int j = 0; j < lca.size(); j++) {
 				if (validate(lca)) {
 					return lca;
+				} else {
+					if (pathsCross(lca, lca.get(j).listOfChildNodes).size() > 0) {
+						lca.remove(j);
+					}
 				}
 			}
 		}
-
 		return lca;
 	}
 
@@ -100,6 +104,7 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 	}
 
 	public static void find (Node root, ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
+		if(root.listOfChildNodes == null || root.listOfChildNodes.size() == 0) return;
 		for (int i = 0; i < root.listOfChildNodes.size(); i++) {
 			Node currentChild = (Node) root.listOfChildNodes.get(i);
 			if ((ancestor1.contains(currentChild)) == false) {
@@ -117,14 +122,16 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 	}
 
+
 	public static ArrayList<Node> pathsCross (ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
 		ArrayList<Node> commonNode = new ArrayList<Node>();
 		for (Node index: ancestor1)
-			if(ancestor2.contains(commonNode)) commonNode.add(index);
+			if(ancestor2.contains(index)) commonNode.add(index);
 		return commonNode;
 	}
 	
 	public static boolean validate (ArrayList<Node> lca) {
+		if (lca == null || lca.size() == 0) return false;
 		for (int i = 0; i < lca.size(); i ++) {
 			Node current = lca.get(i);
 			if (pathsCross(lca, current.listOfChildNodes).size() > 0) return false;

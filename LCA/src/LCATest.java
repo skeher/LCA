@@ -45,17 +45,17 @@ public class LCATest {
 		Node munster = new Node (12);
 		Node connacht = new Node (97);
 		Node ulster = new Node (45);
-		leinster.rootFinder(munster);
-		munster.rootFinder(connacht);
-		munster.rootFinder(ulster);
-		connacht.rootFinder(ulster);
+		leinster.linkAndRootFinder(munster);
+		munster.linkAndRootFinder(connacht);
+		munster.linkAndRootFinder(ulster);
+		connacht.linkAndRootFinder(ulster);
 		provinces.add(leinster);
 		provinces.add(munster);
 		provinces.add(connacht);
 		provinces.add(ulster);
 		assertEquals("Populated acyclic graph: ", true, LCA.isGraphAcyclic(provinces));
 		
-		ulster.rootFinder(leinster);
+		ulster.linkAndRootFinder(leinster);
 		assertEquals("Populated cyclic graph: ", false, LCA.isGraphAcyclic(provinces));
 	}
 	
@@ -69,13 +69,13 @@ public class LCATest {
 		Node e = new Node(5);
 		Node f = new Node(6);
 		
-		a.rootFinder(b);
-		a.rootFinder(c);
-		a.rootFinder(d);
-		b.rootFinder(c);
-		b.rootFinder(f);
-		c.rootFinder(e);
-		e.rootFinder(f);
+		a.linkAndRootFinder(b);
+		a.linkAndRootFinder(c);
+		a.linkAndRootFinder(d);
+		b.linkAndRootFinder(c);
+		b.linkAndRootFinder(f);
+		c.linkAndRootFinder(e);
+		e.linkAndRootFinder(f);
 		
 		ArrayList<Node> test = new ArrayList<Node>();
 		test.add(e);
@@ -85,7 +85,8 @@ public class LCATest {
 		test.add(b);
 		test.add(a);
 		
-		assertEquals("Test: ", a.data, LCA.getLCA(test, f, b));
+		assertEquals("Test: ", a.data, LCA.getLCA(test, f, b).get(2).data);
+		
 	}
 	
 }
