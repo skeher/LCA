@@ -124,8 +124,11 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		return commonNode;
 	}
 	
-	public static ArrayList<Node> validate (ArrayList<Node> lca) {
-		
-		return lca;
+	public static boolean validate (ArrayList<Node> lca) {
+		for (int i = 0; i < lca.size(); i ++) {
+			Node current = lca.get(i);
+			if (pathsCross(lca, current.listOfChildNodes).size() > 0) return false;
+		}
+		return true;
 	}
 }
