@@ -37,6 +37,26 @@ public class LCATest {
 		louth.listOfChildNodes.add(meath);
 		counties.add(meath);
 		assertEquals("Two nodes in graph: ", true, LCA.isGraphAcyclic(counties));
+		
+		ArrayList<Node> provinces = new ArrayList<Node>();
+		assertEquals("Empty graph, I assume is acyclic: ", true, LCA.isGraphAcyclic(provinces));
+		
+		Node leinster = new Node(8);
+		Node munster = new Node (12);
+		Node connacht = new Node (97);
+		Node ulster = new Node (45);
+		leinster.listOfChildNodes.add(munster);
+		munster.listOfChildNodes.add(connacht);
+		munster.listOfChildNodes.add(ulster);
+		connacht.listOfChildNodes.add(ulster);
+		provinces.add(leinster);
+		provinces.add(munster);
+		provinces.add(connacht);
+		provinces.add(ulster);
+		assertEquals("Populated acyclic graph: ", true, LCA.isGraphAcyclic(provinces));
+		
+		ulster.listOfChildNodes.add(leinster);
+		assertEquals("Populated cyclic graph: ", false, LCA.isGraphAcyclic(provinces));
 	}
 	
 	@Test 

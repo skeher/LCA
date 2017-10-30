@@ -49,7 +49,6 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 		return true;
 	}
-
 	
 	private static boolean isGraphAcyclic(ArrayList<Node> graph, ArrayList<Node> listToCompare, ArrayList<Node> checked, boolean graphHasACycle, Node index) {
 		for (int i = 0; i < index.listOfChildNodes.size(); i ++) {
@@ -63,5 +62,4 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		listToCompare.remove(index);
 		return graphHasACycle;
 	}
-
 }
