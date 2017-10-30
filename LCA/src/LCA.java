@@ -49,14 +49,19 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 		return true;
 	}
+
 	
 	private static boolean isGraphAcyclic(ArrayList<Node> graph, ArrayList<Node> listToCompare, ArrayList<Node> checked, boolean graphHasACycle, Node index) {
 		for (int i = 0; i < index.listOfChildNodes.size(); i ++) {
 			Node currentNode = (Node) index.listOfChildNodes.get(i);
-			if (!checked.contains(currentNode)) isGraphAcyclic(graph, listToCompare, checked, graphHasACycle, index);
-			else if (listToCompare.contains(currentNode)) return true;
+			if (!checked.contains(currentNode)) 
+				graphHasACycle = graphHasACycle || isGraphAcyclic(graph, listToCompare, checked, graphHasACycle, currentNode);
+			else if (listToCompare.contains(currentNode)) 
+				graphHasACycle = true;
+				return graphHasACycle;
 		}
 		listToCompare.remove(index);
 		return graphHasACycle;
 	}
+
 }
