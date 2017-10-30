@@ -28,7 +28,15 @@ public class LCATest {
 	
 	@Test
 	public void testIsGraphAcyclic() {
+		Node louth = new Node(7);
+		ArrayList<Node> counties = new ArrayList<Node>();
+		counties.add(louth);
+		assertEquals("One node in the graph should be acyclic: ", true, LCA.isGraphAcyclic(counties));
 		
+		Node meath = new Node(13);
+		louth.listOfChildNodes.add(meath);
+		counties.add(meath);
+		assertEquals("Two nodes in graph: ", true, LCA.isGraphAcyclic(counties));
 	}
 	
 	@Test 
