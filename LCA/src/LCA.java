@@ -46,7 +46,8 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		ancestor1.add(node1);
 		ancestor2.add(node2);
 		find(root, ancestor1, ancestor2);
-
+		
+		lca = pathsCross(ancestor1, ancestor2);
 
 		return lca;
 	}
@@ -106,4 +107,10 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 	}
 
+	public static ArrayList<Node> pathsCross (ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
+		ArrayList<Node> commonNode = new ArrayList<Node>();
+		for (Node index: ancestor1)
+			if(ancestor2.contains(commonNode)) commonNode.add(index);
+		return commonNode;
+	}
 }
