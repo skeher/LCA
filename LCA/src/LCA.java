@@ -5,12 +5,15 @@ import java.util.ArrayList;
 class Node<T> { 
 	int data; //Node stores a value
 	public ArrayList<Node<T>> listOfChildNodes; //keeps track of a nodes children
+	public ArrayList<Node<T>> listOfParentNodes; //keeps track of a nodes parents
 	int child[];
+	int connectingEdges;
 
 	public Node(int data) { //initialise
 		this.data = data;
 		listOfChildNodes = new ArrayList<Node<T>>();
 		child = null;
+		connectingEdges = 0;
 	}
 }
 
@@ -19,14 +22,18 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 	Node root;
 
 	//returns an 
-	public static Node getLCA(ArrayList<Node> graph, Node node1, Node node2) {
+	public static ArrayList<Node> getLCA(ArrayList<Node> graph, Node node1, Node node2) {
 
-		if (!isNotNull(graph, node1, node2) && !isGraphAcyclic(graph)) {
+		if (!isNotNull(graph, node1, node2) || !isGraphAcyclic(graph)) {
 			return null;
-		} else {
-			//ToDo: find lca
 		}
-		return null;
+    	ArrayList<Node> ancestor1 = new ArrayList<Node>();
+    	ArrayList<Node> ancestor2 = new ArrayList<Node>();
+    	ArrayList<Node> lca = new ArrayList<Node>();
+        
+        ancestor1.add(node1);
+        ancestor2.add(node2);
+		return lca;
 	}
 
 	//makes sure no inputs are null.
@@ -65,4 +72,5 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		listToCompare.remove(index);
 		return graphHasACycle;
 	}
+   
 }

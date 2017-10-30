@@ -62,6 +62,7 @@ public class LCATest {
 	@Test 
 	public void testGetLCA () {
 		
+		
 	}
 	
 }
