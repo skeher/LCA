@@ -86,7 +86,21 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 	}
 	
 	public static void find (Node root, ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
-		
+		for (int i = 0; i < root.listOfChildNodes.size(); i++) {
+			Node currentChild = (Node) root.listOfChildNodes.get(i);
+			if ((ancestor1.contains(currentChild)) == false) {
+				find(currentChild, ancestor1, ancestor2);
+			}
+			if ((ancestor2.contains(currentChild) == true)) {
+				find(currentChild, ancestor1, ancestor2);
+			}
+			if (ancestor1.contains(currentChild)) {
+				ancestor1.add(root);
+			}
+			if (ancestor2.contains(currentChild)) {
+				ancestor2.add(root);
+			}
+		}
 	}
    
 }
