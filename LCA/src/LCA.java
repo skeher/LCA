@@ -28,7 +28,7 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		if (!isNotNull(graph, node1, node2) || !isGraphAcyclic(graph)) {
 			return null;
 		}
-		Node root;
+		Node root = null; //for now
     	ArrayList<Node> ancestor1 = new ArrayList<Node>();
     	ArrayList<Node> ancestor2 = new ArrayList<Node>();
     	ArrayList<Node> lca = new ArrayList<Node>();
@@ -40,6 +40,9 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
         		root = graph.get(i);
         	}
         }
+        ancestor1.add(node1);
+        ancestor2.add(node2);
+        find(root, ancestor1, ancestor2);
         
         
 		return lca;
@@ -80,6 +83,10 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 		}
 		listToCompare.remove(index);
 		return graphHasACycle;
+	}
+	
+	public static void find (Node root, ArrayList<Node> ancestor1, ArrayList<Node> ancestor2) {
+		
 	}
    
 }
