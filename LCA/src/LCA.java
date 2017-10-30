@@ -51,9 +51,12 @@ public class LCA { //LCA class. Lowest Common Ancestor will be found here.
 	}
 	
 	private static boolean isGraphAcyclic(ArrayList<Node> graph, ArrayList<Node> listToCompare, ArrayList<Node> checked, boolean graphHasACycle, Node index) {
+		//Forgot to add the indexed node to my ArrayLists... 
+		listToCompare.add(index); 
+		checked.add(index);
 		for (int i = 0; i < index.listOfChildNodes.size(); i ++) {
 			Node currentNode = (Node) index.listOfChildNodes.get(i);
-			if (!checked.contains(currentNode)) 
+			if (!checked.contains(currentNode)) //... which failed to recognise a cyclic graph down here. 
 				graphHasACycle = graphHasACycle || isGraphAcyclic(graph, listToCompare, checked, graphHasACycle, currentNode);
 			else if (listToCompare.contains(currentNode)) 
 				graphHasACycle = true;
