@@ -23,7 +23,16 @@ public class LCATest {
 	
 	@Test
 	public void testSingleNode() {
-		
+		Node one = new Node(1);
+		ArrayList<Node> list = new ArrayList<Node>();
+		list.add(one);
+		assertEquals("One node: ", one, LCA.getLCA(list, one, one));
+	}
+	
+	@Test
+	public void testNullAcyclic () {
+		ArrayList<Node> nullList = new ArrayList<Node>();
+		assertTrue("If the graph is null, it is acyclic: ", LCA.isGraphAcyclic(nullList));
 	}
 	
 	@Test
@@ -34,13 +43,11 @@ public class LCATest {
 		assertEquals("One node in the graph should be acyclic: ", true, LCA.isGraphAcyclic(counties));
 		
 		Node meath = new Node(13);
-		louth.listOfChildNodes.add(meath);
+		louth.linkAndRootFinder(meath);
 		counties.add(meath);
 		assertEquals("Two nodes in graph: ", true, LCA.isGraphAcyclic(counties));
 		
-		ArrayList<Node> provinces = new ArrayList<Node>();
-		assertEquals("Empty graph, I assume is acyclic: ", true, LCA.isGraphAcyclic(provinces));
-		
+		ArrayList<Node> provinces = new ArrayList<Node>();		
 		Node leinster = new Node(8);
 		Node munster = new Node (12);
 		Node connacht = new Node (97);
@@ -73,20 +80,21 @@ public class LCATest {
 		a.linkAndRootFinder(c);
 		a.linkAndRootFinder(d);
 		b.linkAndRootFinder(c);
-		b.linkAndRootFinder(f);
 		c.linkAndRootFinder(e);
 		e.linkAndRootFinder(f);
+		b.linkAndRootFinder(f);
 		
 		ArrayList<Node> test = new ArrayList<Node>();
+		test.add(a);
+		test.add(b);
+		test.add(c);
+		test.add(d);
 		test.add(e);
 		test.add(f);
-		test.add(d);
-		test.add(c);
-		test.add(b);
-		test.add(a);
 		
-		assertEquals("Test: ", a.data, LCA.getLCA(test, f, b).get(2).data);
-		
+		assertEquals("Test: ", e.data, LCA.getLCA(test, f, e).data);
+		assertEquals("Test: ", a.data, LCA.getLCA(test, c, d).data);
+		assertEquals("Test: ", c.data, LCA.getLCA(test, f, c).data);
+		assertEquals("Test: ", b.data, LCA.getLCA(test, c, b).data);
 	}
-	
 }
